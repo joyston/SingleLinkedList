@@ -7,34 +7,57 @@ type List[T any] struct {
 	val  T
 }
 
-func (l *List[T]) Add(aVal T) {
-	for l.next != nil {
-		l = l.next
+type LinkedList[T any] struct {
+	next *List[T]
+	len  int
+}
+
+func (l *LinkedList[T]) Add(aVal T) {
+	temp := l.next
+
+	for temp.next != nil {
+		temp = temp.next
 	}
 
-	temp := List[T]{}
+	node := List[T]{}
 
-	if l.next == nil {
-		l.val = aVal
-		l.next = &temp
-	}
+	node.val = aVal
+	temp.next = &node
 }
 
 //Function to print the list
-func (l *List[T]) PrintList() {
-	for l.next != nil {
-		fmt.Println(l.val)
-		l = l.next
+func (l *LinkedList[T]) PrintList() {
+	temp := l.next
+	for temp.next != nil {
+		fmt.Println(temp.val)
+		temp = temp.next
+	}
+}
+
+func (l *List[T]) Remove() {
+	if l == nil {
+		fmt.Println("List is empty")
+	} else if l.next != nil {
+		//remove node
+		fmt.Println("Removed: ", l.val)
+		l = nil
+	} else {
+		fmt.Println("Removed: ", l.val)
+		fmt.Println("Deleted last item")
+		l = nil
 	}
 }
 
 func main() {
-	l := List[string]{}
+	l := LinkedList[string]{}
 	l.Add("foo")
 	l.Add("bar")
 	l.Add("saving")
 	l.Add("private")
 	l.Add("ryan")
-
+	fmt.Println("*****Actual List****")
 	l.PrintList()
+	fmt.Println("*********")
+	//l.Remove()
+	//l.PrintList()
 }
