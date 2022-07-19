@@ -13,24 +13,33 @@ type LinkedList[T any] struct {
 }
 
 func (l *LinkedList[T]) Add(aVal T) {
-	temp := l.next
+	node := List[T]{}
+	node.val = aVal
+	if l.next == nil {
+		l.next = &node
+	} else {
+		temp := l.next
 
-	for temp.next != nil {
-		temp = temp.next
+		for temp.next != nil {
+			temp = temp.next
+		}
+		temp.next = &node
 	}
 
-	node := List[T]{}
-
-	node.val = aVal
-	temp.next = &node
 }
 
 //Function to print the list
 func (l *LinkedList[T]) PrintList() {
+	if l.next == nil {
+		return
+	}
 	temp := l.next
 	for temp.next != nil {
 		fmt.Println(temp.val)
 		temp = temp.next
+	}
+	if temp.next == nil {
+		fmt.Println(temp.val)
 	}
 }
 
