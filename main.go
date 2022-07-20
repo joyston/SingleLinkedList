@@ -46,6 +46,7 @@ func (l *LinkedList[T]) PrintList() {
 func (l *LinkedList[T]) RemoveFirst() {
 	if l.next == nil {
 		fmt.Println("List is empty")
+		return
 	}
 
 	temp := l.next
@@ -63,14 +64,16 @@ func (l *LinkedList[T]) RemoveFirst() {
 func main() {
 	l := LinkedList[string]{}
 	l.Add("foo")
-	l.Add("bar")
-	l.Add("saving")
-	l.Add("private")
-	l.Add("ryan")
+	// l.Add("bar")
+	// l.Add("saving")
+	// l.Add("private")
+	// l.Add("ryan")
 	fmt.Println("*****Actual List****")
 	l.PrintList()
 
 	l.RemoveFirst()
 	fmt.Println("*****After RemoveFirst****")
+	l.PrintList()
+	l.RemoveFirst()
 	l.PrintList()
 }
