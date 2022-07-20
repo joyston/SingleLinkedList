@@ -43,18 +43,21 @@ func (l *LinkedList[T]) PrintList() {
 	}
 }
 
-func (l *List[T]) Remove() {
-	if l == nil {
+func (l *LinkedList[T]) RemoveFirst() {
+	if l.next == nil {
 		fmt.Println("List is empty")
-	} else if l.next != nil {
-		//remove node
-		fmt.Println("Removed: ", l.val)
-		l = nil
-	} else {
-		fmt.Println("Removed: ", l.val)
-		fmt.Println("Deleted last item")
-		l = nil
 	}
+
+	temp := l.next
+	fmt.Println("Removed: ", temp.val)
+
+	if temp.next != nil {
+		l.next = temp.next
+	} else {
+		l.next = nil
+		fmt.Println("Deleted last item")
+	}
+	temp = nil
 }
 
 func main() {
@@ -66,7 +69,8 @@ func main() {
 	l.Add("ryan")
 	fmt.Println("*****Actual List****")
 	l.PrintList()
-	fmt.Println("*********")
-	//l.Remove()
-	//l.PrintList()
+
+	l.RemoveFirst()
+	fmt.Println("*****After RemoveFirst****")
+	l.PrintList()
 }
